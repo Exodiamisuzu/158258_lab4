@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List with Local Storage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        input {
+            padding: 5px;
+        }
+        button {
+            padding: 5px 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;  /* 增加上下间距 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;  /* 垂直居中对齐 */
+            padding: 10px;  /* 增加内边距 */
+            border: 1px solid #ccc;  /* 添加边框 */
+            border-radius: 5px;  /* 圆角 */
+            background-color: #f9f9f9;  /* 背景颜色 */
+            transition: background-color 0.3s;  /* 添加过渡效果 */
+        }
+        li:hover {
+            background-color: #e0e0e0;  /* 悬停时改变背景颜色 */
+        }
+        .delete-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Local Storage Lab: To-Do List with Local Storage</h1>
+    <p>Objective:</p>
+    <p>Create a simple to-do list where tasks can be added and removed. The list should be saved in Local Storage so that tasks persist even after the browser is closed.</p>
+    
+    <input type="text" id="taskInput" placeholder="Enter a task" />
+    <button onclick="addTask()">Add Task</button>
+    
+    <ul id="taskList"></ul>
+
+    <script>
+        const taskInput = document.getElementById('taskInput');
+        const taskList = document.getElementById('taskList');
+
+        // Load tasks from localStorage when page loads
+        document.addEventListener('DOMContentLoaded', loadTasks);
+
+        // Add new task
+        function addTask() {
+            const taskText = taskInput.value.trim();
+            if (taskText === '') return;
+
+            addTaskToDOM(taskText);
+            saveTaskToLocalStorage(taskText);
+
+            taskInput.value = '';  // Clear input field
+        }
+
+        // Add task to DOM
+        function addTaskToDOM(taskText) {
+            const li = document.createElement('li');
+            li.innerHTML = `${taskText} <button class="delete-btn" onclick="removeTask(this)">Delete</button>`;
+            taskList.appendChild(li);
+        }
+
+        // Save task to localStorage
+        function saveTaskToLocalStorage(taskText) {
+            let tasks = getTasksFromLocalStorage();
+            tasks.push(taskText);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // Load tasks from localStorage
+        function loadTasks() {
+            let tasks = getTasksFromLocalStorage();
+            tasks.forEach(task => addTaskToDOM(task));
+        }
+
+        // Remove task from DOM and localStorage
+        function removeTask(button) {
+            const taskItem = button.parentElement;
+            const taskText = taskItem.firstChild.textContent.trim();
+            taskList.removeChild(taskItem);
+            removeTaskFromLocalStorage(taskText);
+        }
+
+        // Remove task from localStorage
+        function removeTaskFromLocalStorage(taskText) {
+            let tasks = getTasksFromLocalStorage();
+            tasks = tasks.filter(task => task !== taskText);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        // Get tasks from localStorage
+        function getTasksFromLocalStorage() {
+            return JSON.parse(localStorage.getItem('tasks')) || [];
+        }
+    </script>
+
+</body>
+</html>

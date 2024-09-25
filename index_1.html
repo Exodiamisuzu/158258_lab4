@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catalog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Book Catalog</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody id="book-list">
+            <!-- Book data will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Function to load XML file using fetch API
+        function loadXMLDoc() {
+            fetch('book.xml')
+                .then(response => response.text())
+                .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+                .then(xml => displayBooks(xml))
+                .catch(err => console.error('Failed to load XML file:', err));
+        }
+
+        // Function to display books in the table
+        function displayBooks(xml) {
+            var books = xml.getElementsByTagName("book");
+            var tableBody = document.getElementById("book-list");
+
+            for (var i = 0; i < books.length; i++) {
+                var title = books[i].getElementsByTagName("title")[0].textContent;
+                var author = books[i].getElementsByTagName("author")[0].textContent;
+                var price = books[i].getElementsByTagName("price")[0].textContent;
+
+                // Create a new row for each book
+                var row = document.createElement("tr");
+
+                // Create and append title cell
+                var titleCell = document.createElement("td");
+                titleCell.textContent = title;
+                row.appendChild(titleCell);
+
+                // Create and append author cell
+                var authorCell = document.createElement("td");
+                authorCell.textContent = author;
+                row.appendChild(authorCell);
+
+                // Create and append price cell
+                var priceCell = document.createElement("td");
+                priceCell.textContent = price;
+                row.appendChild(priceCell);
+
+                // Append the row to the table body
+                tableBody.appendChild(row);
+            }
+        }
+
+        // Load XML when the page loads
+        window.onload = loadXMLDoc;
+    </script>
+</body>
+</html>

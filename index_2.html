@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profiles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .profile {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>User Profiles</h1>
+<div id="profiles"></div>
+
+<script>
+    // Function to load and display the user profiles
+    async function loadProfiles() {
+        try {
+            const response = await fetch('userProfiles.json'); // Load the JSON file
+            const data = await response.json(); // Parse the JSON data
+
+            const profilesDiv = document.getElementById('profiles');
+            profilesDiv.innerHTML = ''; // Clear any existing content
+
+            // Loop through each profile and display it
+            data.forEach(profile => {
+                const profileDiv = document.createElement('div');
+                profileDiv.classList.add('profile');
+                profileDiv.innerHTML = `
+                    <h2>${profile.firstName} ${profile.lastName}</h2>
+                    <p><strong>Email:</strong> ${profile.email}</p>
+                    <p><strong>Date of Birth:</strong> ${profile.dateOfBirth}</p>
+                    <p><strong>Address:</strong> ${profile.address.street}, ${profile.address.city}, ${profile.address.state}, ${profile.address.zipCode}</p>
+                    <p><strong>Preferences:</strong></p>
+                    <ul>
+                        <li>Theme: ${profile.preferences.theme}</li>
+                        <li>Language: ${profile.preferences.language}</li>
+                        <li>Notifications: ${profile.preferences.notifications ? 'Enabled' : 'Disabled'}</li>
+                        <li>Newsletter Subscription: ${profile.preferences.subscription ? 'Subscribed' : 'Not Subscribed'}</li>
+                    </ul>
+                `;
+                profilesDiv.appendChild(profileDiv);
+            });
+        } catch (error) {
+            console.error('Error loading profiles:', error);
+        }
+    }
+
+    // Load the profiles when the page loads
+    window.onload = loadProfiles;
+</script>
+
+</body>
+</html>

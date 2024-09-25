@@ -1,0 +1,92 @@
+[
+  {
+    "firstName": "Alice",
+    "lastName": "Smith",
+    "email": "alice.smith@example.com",
+    "dateOfBirth": "1990-04-15",
+    "address": {
+      "street": "123 Elm St",
+      "city": "Springfield",
+      "state": "IL",
+      "zipCode": "62704"
+    },
+    "preferences": {
+      "theme": "dark",
+      "language": "English",
+      "notifications": true,
+      "subscription": true
+    }
+  },
+  {
+    "firstName": "Bob",
+    "lastName": "Johnson",
+    "email": "bob.johnson@example.com",
+    "dateOfBirth": "1985-09-22",
+    "address": {
+      "street": "456 Maple Ave",
+      "city": "Shelbyville",
+      "state": "TN",
+      "zipCode": "37160"
+    },
+    "preferences": {
+      "theme": "light",
+      "language": "Spanish",
+      "notifications": false,
+      "subscription": false
+    }
+  },
+  {
+    "firstName": "Carol",
+    "lastName": "Taylor",
+    "email": "carol.taylor@example.com",
+    "dateOfBirth": "1978-12-05",
+    "address": {
+      "street": "789 Oak Blvd",
+      "city": "Ogdenville",
+      "state": "UT",
+      "zipCode": "84401"
+    },
+    "preferences": {
+      "theme": "dark",
+      "language": "French",
+      "notifications": true,
+      "subscription": true
+    }
+  },
+  {
+    "firstName": "David",
+    "lastName": "Brown",
+    "email": "david.brown@example.com",
+    "dateOfBirth": "1992-03-10",
+    "address": {
+      "street": "321 Pine St",
+      "city": "Capital City",
+      "state": "CA",
+      "zipCode": "90001"
+    },
+    "preferences": {
+      "theme": "light",
+      "language": "English",
+      "notifications": true,
+      "subscription": true
+    }
+  },
+  {
+    "firstName": "Eva",
+    "lastName": "Green",
+    "email": "eva.green@example.com",
+    "dateOfBirth": "1988-07-25",
+    "address": {
+      "street": "654 Cedar Ave",
+      "city": "Metropolis",
+      "state": "NY",
+      "zipCode": "10001"
+    },
+    "preferences": {
+      "theme": "dark",
+      "language": "German",
+      "notifications": false,
+      "subscription": true
+    }
+  }
+]
